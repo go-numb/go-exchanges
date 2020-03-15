@@ -42,12 +42,15 @@ func TestParseTime(t *testing.T) {
 }
 
 func TestSize(t *testing.T) {
-	size := 0.03
-	fmt.Printf("%f\n", types.ToSize(size))
+	count := 100
+	size := 0.01
+	for i := 0; i < count; i++ {
+		fmt.Printf("%f\n", types.ToSize(size*float64(i)))
+	}
 }
 
 func BenchmarkeSize(b *testing.B) {
-	size := 0.03
+	size := 0.01
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {

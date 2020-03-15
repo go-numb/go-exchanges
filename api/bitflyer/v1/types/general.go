@@ -124,8 +124,6 @@ func checkMin(size float64) float64 {
 	}
 
 	return math.Trunc(size/SATOSHI) * SATOSHI
-	// f, _ := strconv.ParseFloat(fmt.Sprintf("%.8f", size), 64)
-	// return f
 }
 
 // ProductCode 取引商品コード
