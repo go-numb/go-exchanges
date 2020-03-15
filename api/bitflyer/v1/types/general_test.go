@@ -45,3 +45,13 @@ func TestSize(t *testing.T) {
 	size := 0.03
 	fmt.Printf("%f\n", types.ToSize(size))
 }
+
+func BenchmarkeSize(b *testing.B) {
+	size := 0.03
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		types.ToSize(size * float64(i))
+
+	}
+}
