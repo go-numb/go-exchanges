@@ -257,7 +257,7 @@ func TestChildOrder(t *testing.T) {
 		types.BUY,
 		types.GTC,
 		350000,
-		0.01,
+		types.ToSize(0.03),
 		1,
 	))
 	assert.NoError(t, err)

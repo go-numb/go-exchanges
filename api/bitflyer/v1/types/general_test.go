@@ -1,6 +1,7 @@
 package types_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -38,4 +39,9 @@ func TestParseTime(t *testing.T) {
 		assert.NoError(t, et.UnmarshalJSON([]byte(times[i])))
 		assert.Equal(t, actuals[i]+UTCTIME, et.Time.String())
 	}
+}
+
+func TestSize(t *testing.T) {
+	size := 0.01
+	fmt.Printf("%+v\n", types.ToSize(size))
 }

@@ -114,7 +114,7 @@ func ToPrice(price float64) float64 {
 // ToSize check min size, and make ordersize
 func ToSize(size float64) float64 {
 	size = checkMin(size)
-	return math.RoundToEven(size/SATOSHI) * SATOSHI
+	return math.Round(size/SATOSHI) * SATOSHI
 }
 
 func checkMin(size float64) float64 {
