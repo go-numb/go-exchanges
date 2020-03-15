@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/go-numb/go-exchanges/exchanges/bitflyer/v1/types"
+	"github.com/go-numb/go-exchanges/api/bitflyer/v1/types"
 )
 
 func TestParseTime(t *testing.T) {

@@ -9,8 +9,8 @@ import (
 	"log"
 
 	"github.com/buger/jsonparser"
-	v1 "github.com/go-numb/go-exchanges/exchanges/bitflyer/v1"
-	"github.com/go-numb/go-exchanges/exchanges/bitflyer/v1/types"
+	v1 "github.com/go-numb/go-exchanges/api/bitflyer/v1"
+	"github.com/go-numb/go-exchanges/api/bitflyer/v1/types"
 	"golang.org/x/sync/errgroup"
 )
 

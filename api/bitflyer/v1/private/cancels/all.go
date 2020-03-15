@@ -3,7 +3,7 @@ package cancels
 import (
 	"net/http"
 
-	"github.com/go-numb/go-exchanges/exchanges/bitflyer/v1/types"
+	"github.com/go-numb/go-exchanges/api/bitflyer/v1/types"
 )
 
 const ALLPATH = "/v1/me/cancelallchildorders"

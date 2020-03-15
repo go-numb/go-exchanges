@@ -12,10 +12,10 @@ import (
 	"github.com/buger/jsonparser"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/go-numb/go-exchanges/exchanges/bitflyer/v1/public/board"
-	"github.com/go-numb/go-exchanges/exchanges/bitflyer/v1/public/execution"
-	"github.com/go-numb/go-exchanges/exchanges/bitflyer/v1/public/ticker"
-	"github.com/go-numb/go-exchanges/exchanges/bitflyer/v1/types"
+	"github.com/go-numb/go-exchanges/api/bitflyer/v1/public/board"
+	"github.com/go-numb/go-exchanges/api/bitflyer/v1/public/execution"
+	"github.com/go-numb/go-exchanges/api/bitflyer/v1/public/ticker"
+	"github.com/go-numb/go-exchanges/api/bitflyer/v1/types"
 	"github.com/gorilla/websocket"
 	jsoniter "github.com/json-iterator/go"
 )

@@ -1,8 +1,8 @@
 package v1
 
 import (
-	"github.com/go-numb/go-exchanges/exchanges/bitflyer/v1/private/cancels"
-	"github.com/go-numb/go-exchanges/exchanges/bitflyer/v1/private/orders"
+	"github.com/go-numb/go-exchanges/api/bitflyer/v1/private/cancels"
+	"github.com/go-numb/go-exchanges/api/bitflyer/v1/private/orders"
 	"github.com/pkg/errors"
 )
 

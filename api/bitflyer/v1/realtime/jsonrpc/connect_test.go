@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-numb/go-exchanges/exchanges/bitflyer/v1/realtime/jsonrpc"
-	"github.com/go-numb/go-exchanges/exchanges/bitflyer/v1/types"
+	"github.com/go-numb/go-exchanges/api/bitflyer/v1/realtime/jsonrpc"
+	"github.com/go-numb/go-exchanges/api/bitflyer/v1/types"
 )
 
 func TestConnect(t *testing.T) {
