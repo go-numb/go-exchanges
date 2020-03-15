@@ -1,9 +1,7 @@
 package types
 
 import (
-	"fmt"
 	"math"
-	"strconv"
 	"strings"
 	"time"
 )
@@ -125,10 +123,9 @@ func checkMin(size float64) float64 {
 		return 0.01
 	}
 
-	// shift := math.Pow(10, 8) // SATOSHI
-	// return math.Floor(size*shift+.5) / shift
-	f, _ := strconv.ParseFloat(fmt.Sprintf("%.8f", size), 64)
-	return f
+	return math.Trunc(size/SATOSHI) * SATOSHI
+	// f, _ := strconv.ParseFloat(fmt.Sprintf("%.8f", size), 64)
+	// return f
 }
 
 // ProductCode 取引商品コード
