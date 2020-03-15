@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"testing"
 
-	v1 "github.com/go-numb/go-ccxt/exchanges/bitflyer/v1"
+	v1 "github.com/go-numb/go-exchanges/api/bitflyer/v1"
 )
 
 func BenchmarkSetLimit(b *testing.B) {

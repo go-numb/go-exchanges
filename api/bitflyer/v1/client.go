@@ -53,6 +53,10 @@ func (p *Client) Host() string {
 	return p.host
 }
 
+func (p *Client) Config() *Config {
+	return p.config
+}
+
 func (c *Client) Ticker(req *ticker.Request) (*ticker.Response, error) {
 	res := new(ticker.Response)
 	if err := c.Do(req, res); err != nil {

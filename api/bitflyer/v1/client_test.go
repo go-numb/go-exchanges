@@ -49,6 +49,8 @@ func TestBoard(t *testing.T) {
 	b, err := client.Board(board.New(types.FXBTCJPY))
 	assert.NoError(t, err)
 
+	fmt.Printf("%+v\n", b)
+
 	ask, bid := b.Best()
 	low := math.Min(ask, bid)
 	assert.Equal(t, bid, low)

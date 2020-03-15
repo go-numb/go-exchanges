@@ -97,7 +97,7 @@ const (
 // Side 注文の方向
 type Side int
 
-func (side Side) String() string {
+func ToSide(side int) string {
 	if 0 < side {
 		return BUY
 	} else if side < 0 {
