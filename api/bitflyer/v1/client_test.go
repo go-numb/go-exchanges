@@ -7,6 +7,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/BurntSushi/toml"
+
 	"github.com/go-numb/go-exchanges/api/bitflyer/v1/private/cancels"
 	"github.com/go-numb/go-exchanges/api/bitflyer/v1/private/list"
 	"github.com/go-numb/go-exchanges/api/bitflyer/v1/private/orders"
@@ -351,9 +353,15 @@ func TestCancelAll(t *testing.T) {
 }
 
 func TestChildOrders(t *testing.T) {
+	var m map[string]interface{}
+	toml.DecodeFile("/Users/numb/.keys/bf_endo.toml", &m)
+	fmt.Printf("%+v\n", m)
+
 	client := v1.New(&v1.Config{
-		Key:    os.Getenv("BFKEY"),
-		Secret: os.Getenv("BFSECRET"),
+		// Key:    os.Getenv("BFKEY"),
+		// Secret: os.Getenv("BFSECRET"),
+		Key:    fmt.Sprintf("%s", m["KEY"]),
+		Secret: fmt.Sprintf("%s", m["SECRET"]),
 	})
 	res, err := client.ChildOrders(list.NewForChildOrders(
 		types.FXBTCJPY,

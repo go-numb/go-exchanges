@@ -42,6 +42,6 @@ func TestParseTime(t *testing.T) {
 }
 
 func TestSize(t *testing.T) {
-	size := 0.01
-	fmt.Printf("%+v\n", types.ToSize(size))
+	size := 0.03
+	fmt.Printf("%f\n", types.ToSize(size))
 }

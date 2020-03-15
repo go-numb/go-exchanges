@@ -122,7 +122,9 @@ func checkMin(size float64) float64 {
 	if size < 0.01 {
 		return 0.01
 	}
-	return size
+
+	shift := math.Pow(10, 8) // SATOSHI
+	return math.Floor(size*shift+.5) / shift
 }
 
 // ProductCode 取引商品コード
