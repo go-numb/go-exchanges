@@ -43,9 +43,9 @@ func TestParseTime(t *testing.T) {
 
 func TestSize(t *testing.T) {
 	count := 100
-	size := 0.01
+	size := 0.014992410000000001 // 0001の部分を捨て、SATOSHI単位に合わせる
 	for i := 0; i < count; i++ {
-		fmt.Printf("%f\n", types.ToSize(size*float64(i)))
+		fmt.Printf("%v\n", types.ToSize(size*float64(i)))
 	}
 }
 
