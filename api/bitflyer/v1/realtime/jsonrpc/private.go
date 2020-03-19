@@ -83,7 +83,8 @@ func (p *Client) subscribeForPrivate(key, secret string) error {
 	if !isSuccess { // read channel return, if result  false
 		return err
 	}
-	fmt.Printf("private channel connect success: %t\n", isSuccess)
+
+	p.log.Printf("private channel connect success: %t\n", isSuccess)
 
 	return nil
 }
