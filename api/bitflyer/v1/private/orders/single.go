@@ -27,21 +27,36 @@ type ResponseForChildOrder struct {
 	ChildOrderAcceptanceId string `json:"child_order_acceptance_id"`
 }
 
+// NewForChildOrder side corresponds to int/string
 func NewForChildOrder(
 	code types.ProductCode,
 	oType,
-	side,
 	tif string,
+	side interface{},
 	price,
 	size float64,
 	expire int) *RequestForChildOrder {
+	// side指定がintでもstringでもOK
+	var s string
+	switch v := side.(type) {
+	case int:
+		if 0 < v {
+			s = types.BUY
+		} else if v < 0 {
+			s = types.SELL
+		}
+	case string:
+		s = v
+	default:
+		return nil
+	}
 
 	return &RequestForChildOrder{
 		ProductCode:    code,
 		ChildOrderType: oType,
-		Side:           side,
+		Side:           s,
 		Price:          math.Abs(math.RoundToEven(price)),
-		Size:           size,
+		Size:           types.ToSize(size),
 		TimeInForce:    tif,
 		MinuteToExpire: expire,
 	}
