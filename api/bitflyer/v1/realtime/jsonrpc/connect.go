@@ -111,7 +111,7 @@ type Response struct {
 	Results error
 }
 
-func Connect(ctx context.Context, ch chan Response, channels, symbols []string, l *log.Logger) {
+func Connect(ctx context.Context, ch chan Response, channels, symbols []string, l *log.Logger) error {
 	c := New(l)
 	defer c.Close()
 
@@ -119,7 +119,9 @@ RECONNECT:
 
 	requests, err := c.subscribe(channels, symbols)
 	if err != nil {
-		log.Fatalf("disconnect %v", err)
+		// tls: use of closed connection
+		c.log.Fatalf("disconnect %v", err)
+		return fmt.Errorf("disconnect %v", err)
 	}
 	defer c.unsubscribe(requests)
 
@@ -208,7 +210,7 @@ RECONNECT:
 		// 外部からのキャンセル
 		if strings.Contains(err.Error(), context.Canceled.Error()) {
 			// defer close()/unsubscribe()
-			return
+			return fmt.Errorf("context stop in private %v", err)
 		}
 	}
 

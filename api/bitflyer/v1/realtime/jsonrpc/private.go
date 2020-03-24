@@ -89,7 +89,7 @@ func (p *Client) subscribeForPrivate(key, secret string) error {
 	return nil
 }
 
-func ConnectForPrivate(ctx context.Context, ch chan Response, key, secret string, channels []string, l *log.Logger) {
+func ConnectForPrivate(ctx context.Context, ch chan Response, key, secret string, channels []string, l *log.Logger) error {
 	c := New(l)
 	defer c.Close()
 
@@ -97,11 +97,15 @@ RECONNECT:
 
 	if err := c.subscribeForPrivate(key, secret); err != nil {
 		c.log.Fatalf("cant connect to private %v", err)
+		// tls: use of closed connection
+		return fmt.Errorf("cant connect to private %v", err)
 	}
 
 	requests, err := c.subscribe(channels, nil)
 	if err != nil {
-		c.log.Fatalf("disconnect %v", err)
+		c.log.Fatalf("disconnect to private %v", err)
+		// tls: use of closed connection
+		return fmt.Errorf("disconnect to private %v", err)
 	}
 	defer c.unsubscribe(requests)
 
@@ -184,7 +188,7 @@ RECONNECT:
 		// 外部からのキャンセル
 		if strings.Contains(err.Error(), context.Canceled.Error()) {
 			// defer close()/unsubscribe()
-			return
+			return fmt.Errorf("context stop in private %v", err)
 		}
 	}
 
