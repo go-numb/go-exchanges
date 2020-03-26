@@ -95,7 +95,7 @@ func (p *Client) Do(req Requester, result interface{}) error {
 
 	res, err := p.HTTPClient.Do(r)
 	if err != nil {
-		return errors.Wrapf(err, "%s request to %s, in body of %s", method, u.String(), string(payload))
+		return errors.Wrapf(err, "%s request to %s, in body of %s and response status %s", method, u.String(), string(payload), res.Status)
 	}
 	defer res.Body.Close()
 	// read api limit from header

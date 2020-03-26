@@ -420,6 +420,7 @@ func TestPositions(t *testing.T) {
 		Key:    os.Getenv("BFKEY"),
 		Secret: os.Getenv("BFSECRET"),
 	})
+	start := time.Now()
 	res, err := client.Positions(list.NewForPositions(
 		types.FXBTCJPY,
 	))
@@ -431,7 +432,7 @@ func TestPositions(t *testing.T) {
 		sum += v.Size
 	}
 
-	fmt.Printf("%+v\n", sum)
+	fmt.Printf("%+v	%v\n", sum, time.Now().Sub(start))
 
 	fmt.Printf("%+v	%+v\n", client.Limit.Remain(true), client.Limit.Remain(false))
 }
