@@ -1,6 +1,7 @@
 package v1_test
 
 import (
+	"encoding/json"
 	"fmt"
 	"math"
 	"os"
@@ -486,4 +487,20 @@ func TestCommission(t *testing.T) {
 
 	fmt.Printf("%+v\n", res)
 	fmt.Printf("%+v	%+v\n", client.Limit.Remain(true), client.Limit.Remain(false))
+}
+
+const (
+	SERVERLOG = ""
+)
+
+func TestReadJSON(t *testing.T) {
+	f, _ := os.Open(SERVERLOG)
+	defer f.Close()
+
+	var s []map[string]interface{}
+	json.NewDecoder(f).Decode(&s)
+
+	for i := range s {
+		fmt.Printf("%s	%+v\n", s[i]["time"], s[i]["message"])
+	}
 }
