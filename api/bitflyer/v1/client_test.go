@@ -416,6 +416,27 @@ func TestMyExecutions(t *testing.T) {
 	fmt.Printf("%+v	%+v\n", client.Limit.Remain(true), client.Limit.Remain(false))
 }
 
+func TestAccountInfo(t *testing.T) {
+	client := v1.New(&v1.Config{
+		Key:    os.Getenv("BFKEY"),
+		Secret: os.Getenv("BFSECRET"),
+	})
+	start := time.Now()
+	col, err := client.Collateral(collateral.New())
+	assert.NoError(t, err)
+
+	res, err := client.Positions(list.NewForPositions(
+		types.FXBTCJPY,
+	))
+	assert.NoError(t, err)
+
+	avg, size, sfd, pnl := res.Aggregate()
+
+	fmt.Printf("証拠金: %.1f,	損益: %.1f,	証拠金維持率: %.1f％,	必要保証金: %.1f\n", col.Collateral, col.OpenPositionPNL, col.KeepRate*100, col.RequireCollateral)
+	fmt.Printf("平均単価: %.1f,	%.4fBTC,	sfd:%.1f,	pnl:%.1f,	%v\n", avg, size, sfd, pnl, time.Now().Sub(start))
+	fmt.Printf("%+v	%+v\n", client.Limit.Remain(true), client.Limit.Remain(false))
+}
+
 func TestPositions(t *testing.T) {
 	client := v1.New(&v1.Config{
 		Key:    os.Getenv("BFKEY"),
