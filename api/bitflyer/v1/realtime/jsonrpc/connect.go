@@ -278,6 +278,5 @@ func (p *Client) unsubscribe(requests []Request) {
 		}
 	}
 
-	defer p.conn.Close()
 	p.log.Println("killed subscribe")
 }
