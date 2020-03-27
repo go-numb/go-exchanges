@@ -120,7 +120,7 @@ RECONNECT:
 	requests, err := c.subscribe(channels, symbols)
 	if err != nil {
 		// tls: use of closed connection
-		c.log.Fatalf("disconnect %v", err)
+		c.log.Printf("disconnect %v", err)
 		return fmt.Errorf("disconnect %v", err)
 	}
 	defer c.unsubscribe(requests)

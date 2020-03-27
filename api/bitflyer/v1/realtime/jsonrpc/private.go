@@ -103,7 +103,7 @@ RECONNECT:
 
 	requests, err := c.subscribe(channels, nil)
 	if err != nil {
-		c.log.Fatalf("disconnect to private %v", err)
+		c.log.Printf("disconnect to private %v", err)
 		// tls: use of closed connection
 		return fmt.Errorf("disconnect to private %v", err)
 	}
