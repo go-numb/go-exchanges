@@ -427,13 +427,9 @@ func TestPositions(t *testing.T) {
 	))
 	assert.NoError(t, err)
 
-	var sum float64
-	for i, v := range *res {
-		fmt.Printf("%d	%+v\n", i, v)
-		sum += v.Size
-	}
+	avg, size, sfd, pnl := res.Aggregate()
 
-	fmt.Printf("%+v	%v\n", sum, time.Now().Sub(start))
+	fmt.Printf("%.1f	%+v	sfd:%.1f	pnl:%.1f	%v\n", avg, size, sfd, pnl, time.Now().Sub(start))
 
 	fmt.Printf("%+v	%+v\n", client.Limit.Remain(true), client.Limit.Remain(false))
 }

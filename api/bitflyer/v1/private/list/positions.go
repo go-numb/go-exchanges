@@ -5,6 +5,7 @@ import (
 
 	"github.com/go-numb/go-exchanges/api/bitflyer/v1/types"
 	"github.com/google/go-querystring/query"
+	"gonum.org/v1/gonum/stat"
 )
 
 const POSITIONSSPATH = "/v1/me/getpositions"
@@ -50,4 +51,34 @@ func (p *RequestForPositions) Query() string {
 
 func (p *RequestForPositions) Payload() []byte {
 	return nil
+}
+
+func (positions ResponseForPositions) Aggregate() (avg, size, sfd, pnl float64) {
+	if len(positions) <= 0 {
+		return avg, size, sfd, pnl
+	}
+
+	var (
+		prices = make([]float64, len(positions))
+		sizes  = make([]float64, len(positions))
+	)
+
+	for i := range positions {
+		if positions[i].Side == types.BUY {
+			size += positions[i].Size
+		} else if positions[i].Side == types.SELL {
+			size -= positions[i].Size
+		}
+
+		sizes[i] = positions[i].Size
+		prices[i] = positions[i].Price
+		sfd += positions[i].Sfd
+		pnl += positions[i].Pnl
+	}
+
+	if len(sizes) != len(prices) {
+		return avg, size, sfd, pnl
+	}
+
+	return stat.Mean(prices, sizes), size, sfd, pnl
 }
