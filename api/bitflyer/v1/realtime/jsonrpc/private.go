@@ -96,7 +96,7 @@ func ConnectForPrivate(ctx context.Context, ch chan Response, key, secret string
 RECONNECT:
 
 	if err := c.subscribeForPrivate(key, secret); err != nil {
-		c.log.Fatalf("cant connect to private %v", err)
+		c.log.Printf("cant connect to private %v", err)
 		// tls: use of closed connection
 		return fmt.Errorf("cant connect to private %v", err)
 	}
