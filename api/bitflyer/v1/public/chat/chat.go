@@ -1,6 +1,7 @@
 package chat
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -11,6 +12,13 @@ const PATH = "/v1/getchats"
 
 type Request struct {
 	FromDate time.Time `json:"from_date" url:"from_date"`
+}
+
+type Response []Chat
+type Chat struct {
+	Nickname string `json:"nickname"`
+	Message  string `json:"message"`
+	Date     string `json:"date"`
 }
 
 func New(after time.Time) *Request {
@@ -36,9 +44,10 @@ func (p *Request) Payload() []byte {
 	return nil
 }
 
-type Response []Chat
-type Chat struct {
-	Nickname string `json:"nickname"`
-	Message  string `json:"message"`
-	Date     string `json:"date"`
+func (chats Response) List() []string {
+	var list []string
+	for i := range chats {
+		list = append(list, fmt.Sprintf("%d:	%s	%s	%s\n", i, chats[i].Nickname, chats[i].Message, chats[i].Date))
+	}
+	return list
 }

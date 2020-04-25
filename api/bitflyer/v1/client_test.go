@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math"
 	"os"
+	"strings"
 	"testing"
 	"time"
 
@@ -127,9 +128,7 @@ func TestChats(t *testing.T) {
 	chats, err := client.Chats(chat.New(time.Now().Add(-24 * time.Hour)))
 	assert.NoError(t, err)
 
-	for i, v := range *chats {
-		fmt.Printf("%d:	%+v\n", i, v)
-	}
+	fmt.Printf("%+v\n", strings.Join(chats.List(), "\n"))
 }
 
 /*
@@ -144,9 +143,7 @@ func TestBalance(t *testing.T) {
 	balance, err := client.Balance(balance.New())
 	assert.NoError(t, err)
 
-	for i, v := range *balance {
-		fmt.Printf("%d:	%s	%.4f	%.4f\n", i, v.ProductCode, v.Amount, v.Available)
-	}
+	fmt.Printf("%+v\n", strings.Join(balance.List(), "\n"))
 }
 
 func TestCollateral(t *testing.T) {

@@ -1,6 +1,7 @@
 package balance
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/go-numb/go-exchanges/api/bitflyer/v1/types"
@@ -38,4 +39,12 @@ func (p *Request) Query() string {
 
 func (p *Request) Payload() []byte {
 	return nil
+}
+
+func (assets Response) List() []string {
+	var list []string
+	for i := range assets {
+		list = append(list, fmt.Sprintf("%d:	%s	%.4f	%.4f\n", i, assets[i].ProductCode, assets[i].Amount, assets[i].Available))
+	}
+	return list
 }
