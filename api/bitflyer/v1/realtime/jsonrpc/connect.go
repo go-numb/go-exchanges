@@ -1,6 +1,7 @@
 package jsonrpc
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"log"
@@ -264,6 +265,15 @@ func (p *Client) subscribe(channels, symbols []string) (requests []Request, err 
 			return nil, err
 		}
 		p.log.Printf("subscribed: %v", requests[i])
+
+		p.conn.SetReadDeadline(time.Now().Add(READDEADLINE))
+		_, msg, err := p.conn.ReadMessage()
+		if err != nil {
+			return nil, fmt.Errorf("can't receive error: %v", err)
+		}
+		if !bytes.Contains(msg, []byte(`true`)) && !strings.Contains(string(msg), fmt.Sprintf("%v", requests[i].Params["channel"])) {
+			return nil, fmt.Errorf("response has not true: %v", err)
+		}
 	}
 
 	return requests, nil
